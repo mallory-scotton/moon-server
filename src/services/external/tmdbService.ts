@@ -104,6 +104,18 @@ class TMDBService {
     return await this.get<types.TMDBNetworkImages>(`/network/${id}/images`);
   }
 
+  async getWatchProviderRegions(options?: types.TMDBLanguageOption): Promise<types.TMDBRegionResult> {
+    return await this.get<types.TMDBRegionResult>('/watch/providers/regions', options);
+  }
+
+  async getMovieProviders(options?: types.TMDBProviderOptions): Promise<types.TMDBWatchProviderResult> {
+    return await this.get<types.TMDBWatchProviderResult>('/watch/providers/movie', options);
+  }
+
+  async getTvShowProviders(options?: types.TMDBProviderOptions): Promise<types.TMDBWatchProviderResult> {
+    return await this.get<types.TMDBWatchProviderResult>('/watch/providers/tv', options);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
