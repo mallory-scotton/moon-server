@@ -183,6 +183,10 @@ class TMDBService {
     return await this.get<types.TMDBTvShowDiscoverResult>('/discover/tv', options);
   }
 
+  async findByExternalId(id: string, options: types.TMDBExternalIdOptions): Promise<types.TMDBFindResult> {
+    return await this.get<types.TMDBFindResult>(`/find/${id}`, options);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
