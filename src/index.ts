@@ -6,7 +6,7 @@ import { loadConfiguration, ensureAppDataDirectories, ensureFFmpegBinaries } fro
 
 dotenv.config();
 
-async function startApplication() {
+export async function startApplication() {
   await ensureAppDataDirectories();
   await ensureFFmpegBinaries();
   await loadConfiguration();
@@ -14,4 +14,6 @@ async function startApplication() {
   await startServer();
 }
 
-startApplication();
+if (!('electron' in process.versions)) {
+  startApplication();
+}
