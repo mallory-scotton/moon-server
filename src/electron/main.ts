@@ -1,6 +1,4 @@
 import { app, BrowserWindow } from 'electron';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { startApplication } from '../index';
 
 let mainWindow: BrowserWindow | null = null;
@@ -20,6 +18,7 @@ async function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    title: 'Moon Home Theater',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
