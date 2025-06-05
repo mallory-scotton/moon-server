@@ -147,6 +147,30 @@ class TMDBService {
     return await this.get<types.TMDBCompanyImages>(`/company/${id}/images`);
   }
 
+  async getApiConfiguration(): Promise<types.TMDBConfiguration> {
+    return await this.get<types.TMDBConfiguration>('/configuration');
+  }
+
+  async getCountries(): Promise<types.TMDBCountryConfiguration[]> {
+    return await this.get<types.TMDBCountryConfiguration[]>('/configuration/countries');
+  }
+
+  async getLanguages(): Promise<types.TMDBLanguageConfiguration[]> {
+    return await this.get<types.TMDBLanguageConfiguration[]>('/configuration/languages');
+  }
+
+  async getJobs(): Promise<types.TMDBJobConfiguration[]> {
+    return await this.get<types.TMDBJobConfiguration[]>('/configuration/jobs');
+  }
+
+  async getPrimaryTranslations(): Promise<string[]> {
+    return await this.get<string[]>('/configuration/primary_translations');
+  }
+
+  async getTimezones(): Promise<types.TMDBTimezoneConfiguration[]> {
+    return await this.get<types.TMDBTimezoneConfiguration[]>('/configuration/timezones');
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
