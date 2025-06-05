@@ -135,6 +135,18 @@ class TMDBService {
     return await this.get<types.TMDBTranslation>(`/collection/${id}/translations`, options);
   }
 
+  async getCompanyDetails(id: number): Promise<types.TMDBCompanyDetails> {
+    return await this.get<types.TMDBCompanyDetails>(`/company/${id}`);
+  }
+
+  async getCompanyAlternativeNames(id: number): Promise<types.TMDBAlternativeNames> {
+    return await this.get<types.TMDBAlternativeNames>(`/company/${id}/alternative_names`);
+  }
+
+  async getCompanyImages(id: number): Promise<types.TMDBCompanyImages> {
+    return await this.get<types.TMDBCompanyImages>(`/company/${id}/images`);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
