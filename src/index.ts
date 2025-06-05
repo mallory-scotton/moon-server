@@ -6,8 +6,12 @@ import { loadConfiguration, ensureAppDataDirectories, ensureFFmpegBinaries } fro
 
 dotenv.config();
 
-await ensureAppDataDirectories();
-await ensureFFmpegBinaries();
-await loadConfiguration();
-await sequelize.sync();
-await startServer();
+async function startApplication() {
+  await ensureAppDataDirectories();
+  await ensureFFmpegBinaries();
+  await loadConfiguration();
+  await sequelize.sync();
+  await startServer();
+}
+
+startApplication();
