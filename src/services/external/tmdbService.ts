@@ -265,6 +265,107 @@ class TMDBService {
 
     return await this.get<types.TMDBAppendToResponse<types.TMDBMovieDetails, T, 'movie'>>(`/movie/${id}`, options);
   }
+
+  async getMovieAlternativeTitles(id: number): Promise<types.TMDBAlternativeTitles> {
+    return await this.get<types.TMDBAlternativeTitles>(`/movie/${id}/alternative_titles`);
+  }
+
+  async getMovieChanges(
+    id: number,
+    options?: types.TMDBChangeOption
+  ): Promise<types.TMDBChanges<types.TMDBMovieChangeValue>> {
+    return await this.get<types.TMDBChanges<types.TMDBMovieChangeValue>>(`/movie/${id}/changes`, options);
+  }
+
+  async getMovieCredits(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBCredits> {
+    return await this.get<types.TMDBCredits>(`/movie/${id}/credits`, options);
+  }
+
+  async getMovieExternalIds(id: number): Promise<types.TMDBExternalIds> {
+    return await this.get<types.TMDBExternalIds>(`/movie/${id}/external_ids`);
+  }
+
+  async getMovieImages(id: number, options?: types.TMDBMoviesImageSearchOptions): Promise<types.TMDBImages> {
+    const computedOptions = {
+      include_image_language: options?.include_image_language?.join(','),
+      language: options?.language
+    };
+    return await this.get<types.TMDBImages>(`/movie/${id}/images`, computedOptions);
+  }
+
+  async getMovieKeywords(id: number): Promise<types.TMDBKeywords> {
+    return await this.get<types.TMDBKeywords>(`/movie/${id}/keywords`);
+  }
+
+  async getMovieLists(
+    id: number,
+    options?: types.TMDBLanguageOption & types.TMDBPageOption
+  ): Promise<types.TMDBMovieLists> {
+    return await this.get<types.TMDBMovieLists>(`/movie/${id}/lists`, options);
+  }
+
+  async getMovieRecommendations(
+    id: number,
+    options?: types.TMDBLanguageOption & types.TMDBPageOption
+  ): Promise<types.TMDBRecommendations> {
+    return await this.get<types.TMDBRecommendations>(`/movie/${id}/recommendations`, options);
+  }
+
+  async getMovieReleaseDates(id: number): Promise<types.TMDBReleaseDates> {
+    return await this.get<types.TMDBReleaseDates>(`/movie/${id}/release_dates`);
+  }
+
+  async getMovieReviews(
+    id: number,
+    options?: types.TMDBLanguageOption & types.TMDBPageOption
+  ): Promise<types.TMDBReviews> {
+    return await this.get<types.TMDBReviews>(`/movie/${id}/reviews`, options);
+  }
+
+  async getSimilarMovie(
+    id: number,
+    options?: types.TMDBLanguageOption & types.TMDBPageOption
+  ): Promise<types.TMDBSimilarMovies> {
+    return await this.get<types.TMDBSimilarMovies>(`/movie/${id}/similar`, options);
+  }
+
+  async getMovieTranslations(id: number): Promise<types.TMDBTranslations> {
+    return await this.get<types.TMDBTranslations>(`/movie/${id}/translations`);
+  }
+
+  async getMovieVideos(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBVideos> {
+    return await this.get<types.TMDBVideos>(`/movie/${id}/videos`, options);
+  }
+
+  async getMovieWatchProviders(id: number): Promise<types.TMDBWatchProviders> {
+    return await this.get<types.TMDBWatchProviders>(`/movie/${id}/watch/providers`);
+  }
+
+  async getLatestMovie(): Promise<types.TMDBLatestMovie> {
+    return await this.get<types.TMDBLatestMovie>('/movie/latest');
+  }
+
+  async getNowPlayingMovies(
+    options?: types.TMDBPageOption & types.TMDBLanguageOption & types.TMDBRegionOption
+  ): Promise<types.TMDBMoviesPlayingNow> {
+    return await this.get<types.TMDBMoviesPlayingNow>('/movie/now_playing', options);
+  }
+
+  async getPopularMovies(options?: types.TMDBLanguageOption & types.TMDBPageOption): Promise<types.TMDBPopularMovies> {
+    return await this.get<types.TMDBPopularMovies>('/movie/popular', options);
+  }
+
+  async getTopRatedMovies(
+    options?: types.TMDBPageOption & types.TMDBLanguageOption & types.TMDBRegionOption
+  ): Promise<types.TMDBTopRatedMovies> {
+    return await this.get<types.TMDBTopRatedMovies>('/movie/top_rated', options);
+  }
+
+  async getUpcomingMovies(
+    options?: types.TMDBPageOption & types.TMDBLanguageOption & types.TMDBRegionOption
+  ): Promise<types.TMDBUpcomingMovies> {
+    return await this.get<types.TMDBUpcomingMovies>('/movie/upcoming', options);
+  }
 }
 
 export default TMDBService;
