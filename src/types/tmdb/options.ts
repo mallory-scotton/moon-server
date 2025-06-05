@@ -344,3 +344,19 @@ export type TMDBProviderOptions = TMDBWatchRegionOption & TMDBLanguageOption;
 export interface TMDBMoviesImageSearchOptions extends TMDBLanguageOption {
   include_image_language?: string[];
 }
+
+export interface TMDBTvEpisodeImageSearchOptions extends TMDBLanguageOption {
+  include_image_language?: string[];
+}
+
+export interface TMDBTvEpisodeVideoSearchOptions extends TMDBLanguageOption {
+  include_video_language?: string[];
+}
+
+export interface TMDBTvSeasonImageSearchOptions extends TMDBLanguageOption {
+  include_image_language?: string[];
+}
+
+export interface TMDBTvSeasonVideoSearchOptions extends TMDBLanguageOption {
+  include_video_language?: string[];
+}
