@@ -46,3 +46,7 @@ export function getLogsPath(): string {
 export function getCachePath(): string {
   return getAppDataSubPath('cache');
 }
+
+export function getConfigPath(): string {
+  return path.join(getAppDataPath(), 'config.ini');
+}

@@ -4,8 +4,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 
-const PORT = process.env.PORT || 45001;
-
 const app = express();
 const server = createServer(app);
 
@@ -22,8 +20,8 @@ app.get('/', (req, res) => {
 export async function startServer(): Promise<void> {
   return new Promise((resolve, rejects) => {
     try {
-      server.listen(PORT, () => {
-        console.log('Server is listenning on port:', PORT);
+      server.listen(process.moon.server.port, () => {
+        console.log('Server is listenning on port:', process.moon.server.port);
         resolve();
       });
     } catch (error) {
