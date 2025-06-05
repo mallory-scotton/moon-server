@@ -6,7 +6,7 @@ import { AppConfiguration } from '../types';
 const DEFAULT_CONFIG: AppConfiguration = {
   server: {
     port: 45001,
-    host: '0.0.0.0'
+    host: '127.0.0.1'
   },
   cors: {
     origin: ['*'],

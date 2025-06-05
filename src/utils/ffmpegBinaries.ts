@@ -15,8 +15,8 @@ export function getFFprobePath(): string {
 export async function copyBinariesToAppData(): Promise<void> {
   const binariesPath = getAppDataSubPath('binaries');
 
-  const ffmpegDestination = path.join(binariesPath, 'ffmpeg');
-  const ffprobeDestination = path.join(binariesPath, 'ffprobe');
+  const ffmpegDestination = path.join(getLocalFFmpegPath());
+  const ffprobeDestination = path.join(getLocalFFprobePath());
 
   await fs.copyFile(ffmpegPath.path, ffmpegDestination);
   await fs.copyFile(ffprobePath.path, ffprobeDestination);
