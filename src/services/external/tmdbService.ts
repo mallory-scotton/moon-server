@@ -187,6 +187,14 @@ class TMDBService {
     return await this.get<types.TMDBFindResult>(`/find/${id}`, options);
   }
 
+  async getMovieGenres(options?: types.TMDBLanguageOption): Promise<types.TMDBGenres> {
+    return await this.get<types.TMDBGenres>('/genre/movie/list', options);
+  }
+
+  async getTvShowGenres(options?: types.TMDBLanguageOption): Promise<types.TMDBGenres> {
+    return await this.get<types.TMDBGenres>('/genre/tv/list', options);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
