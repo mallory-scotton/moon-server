@@ -92,6 +92,18 @@ class TMDBService {
     return await this.get<types.TMDBReviewDetails>(`/review/${id}`);
   }
 
+  async getNetworkDetails(id: number): Promise<types.TMDBNetworkDetails> {
+    return await this.get<types.TMDBNetworkDetails>(`/network/${id}`);
+  }
+
+  async getNetworkAlternativeNames(id: number): Promise<types.TMDBAlternativeNames> {
+    return await this.get<types.TMDBAlternativeNames>(`/network/${id}/alternative_names`);
+  }
+
+  async getNetworkImages(id: number): Promise<types.TMDBNetworkImages> {
+    return await this.get<types.TMDBNetworkImages>(`/network/${id}/images`);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
