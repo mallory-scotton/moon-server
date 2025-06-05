@@ -366,6 +366,282 @@ class TMDBService {
   ): Promise<types.TMDBUpcomingMovies> {
     return await this.get<types.TMDBUpcomingMovies>('/movie/upcoming', options);
   }
+
+  async getTvEpisodeDetails<T extends types.TMDBAppendToResponseTvEpisodeKey[] | undefined>(
+    episodeSelection: types.TMDBEpisodeSelection,
+    appendToResponse?: T,
+    options?: types.TMDBLanguageOption
+  ) {
+    const combinedOptions = {
+      append_to_response: appendToResponse ? appendToResponse.join(',') : undefined,
+      ...options
+    };
+
+    const path = `/tv/${episodeSelection.tvShowID}/season/${episodeSelection.seasonNumber}/episode/${episodeSelection.episodeNumber}`;
+    return await this.get<types.TMDBAppendToResponse<Omit<types.TMDBEpisode, 'show_id'>, T, 'tvEpisode'>>(
+      path,
+      combinedOptions
+    );
+  }
+
+  async getTvEpisodeChanges(
+    episodeID: number,
+    options?: types.TMDBChangeOption
+  ): Promise<types.TMDBChanges<types.TMDBTvEpisodeChangeValue>> {
+    return await this.get<types.TMDBChanges<types.TMDBTvEpisodeChangeValue>>(
+      `/tv/episode/${episodeID}/changes`,
+      options
+    );
+  }
+
+  async getTvEpisodeCredits(
+    episodeSelection: types.TMDBEpisodeSelection,
+    options?: types.TMDBLanguageOption
+  ): Promise<types.TMDBTvEpisodeCredit> {
+    const path = `/tv/${episodeSelection.tvShowID}/season/${episodeSelection.seasonNumber}/episode/${episodeSelection.episodeNumber}/credits`;
+    return await this.get<types.TMDBTvEpisodeCredit>(path, options);
+  }
+
+  async getTvEpisodeExternalIds(episodeSelection: types.TMDBEpisodeSelection): Promise<types.TMDBExternalIds> {
+    const path = `/tv/${episodeSelection.tvShowID}/season/${episodeSelection.seasonNumber}/episode/${episodeSelection.episodeNumber}/external_ids`;
+    return await this.get<types.TMDBExternalIds>(path);
+  }
+
+  async getTvEpisodeImages(
+    episodeSelection: types.TMDBEpisodeSelection,
+    options?: types.TMDBTvEpisodeImageSearchOptions
+  ): Promise<types.TMDBImages> {
+    const computedOptions = {
+      include_image_language: options?.include_image_language?.join(','),
+      language: options?.language
+    };
+    const path = `/tv/${episodeSelection.tvShowID}/season/${episodeSelection.seasonNumber}/episode/${episodeSelection.episodeNumber}/images`;
+    return await this.get<types.TMDBImages>(path, computedOptions);
+  }
+
+  async getTvEpisodeTranslations(
+    episodeSelection: types.TMDBEpisodeSelection
+  ): Promise<types.TMDBTvEpisodeTranslations> {
+    const path = `/tv/${episodeSelection.tvShowID}/season/${episodeSelection.seasonNumber}/episode/${episodeSelection.episodeNumber}/translations`;
+    return await this.get<types.TMDBTvEpisodeTranslations>(path);
+  }
+
+  async getTvEpisodeVideos(
+    episodeSelection: types.TMDBEpisodeSelection,
+    options?: types.TMDBTvEpisodeVideoSearchOptions
+  ): Promise<types.TMDBVideos> {
+    const computedOptions = {
+      include_video_language: options?.include_video_language?.join(','),
+      language: options?.language
+    };
+    const path = `/tv/${episodeSelection.tvShowID}/season/${episodeSelection.seasonNumber}/episode/${episodeSelection.episodeNumber}/videos`;
+    return await this.get<types.TMDBVideos>(path, computedOptions);
+  }
+
+  async getTvSeasonDetails<T extends types.TMDBAppendToResponseTvSeasonKey[] | undefined>(
+    seasonSelection: types.TMDBSeasonSelection,
+    appendToResponse?: T,
+    options?: types.TMDBLanguageOption
+  ) {
+    const combinedOptions = {
+      append_to_response: appendToResponse ? appendToResponse.join(',') : undefined,
+      ...options
+    };
+
+    const path = `/tv/${seasonSelection.tvShowID}/season/${seasonSelection.seasonNumber}`;
+    return await this.get<types.TMDBAppendToResponse<types.TMDBSeasonDetails, T, 'tvSeason'>>(path, combinedOptions);
+  }
+
+  async getTvSeasonAggregateCredits(
+    seasonSelection: types.TMDBSeasonSelection,
+    options?: types.TMDBLanguageOption
+  ): Promise<types.TMDBAggregateCredits> {
+    const path = `/tv/${seasonSelection.tvShowID}/season/${seasonSelection.seasonNumber}/aggregate_credits`;
+    return await this.get<types.TMDBAggregateCredits>(path, options);
+  }
+
+  async getTvSeasonChanges(
+    seasonId: number,
+    options?: types.TMDBChangeOption
+  ): Promise<types.TMDBChanges<types.TMDBTvSeasonChangeValue>> {
+    return await this.get<types.TMDBChanges<types.TMDBTvSeasonChangeValue>>(`/tv/season/${seasonId}/changes`, options);
+  }
+
+  async getTvSeasonCredits(
+    seasonSelection: types.TMDBSeasonSelection,
+    options?: types.TMDBLanguageOption
+  ): Promise<types.TMDBCredits> {
+    const path = `/tv/${seasonSelection.tvShowID}/season/${seasonSelection.seasonNumber}/credits`;
+    return await this.get<types.TMDBCredits>(path, options);
+  }
+
+  async getTvSeasonExternalIds(
+    seasonSelection: types.TMDBSeasonSelection,
+    options?: types.TMDBLanguageOption
+  ): Promise<types.TMDBExternalIds> {
+    const path = `/tv/${seasonSelection.tvShowID}/season/${seasonSelection.seasonNumber}/external_ids`;
+    return await this.get<types.TMDBExternalIds>(path, options);
+  }
+
+  async getTvSeasonImages(
+    seasonSelection: types.TMDBSeasonSelection,
+    options?: types.TMDBTvSeasonImageSearchOptions
+  ): Promise<types.TMDBImages> {
+    const computedOptions = {
+      include_image_language: options?.include_image_language?.join(','),
+      language: options?.language
+    };
+    const path = `/tv/${seasonSelection.tvShowID}/season/${seasonSelection.seasonNumber}/images`;
+    return await this.get<types.TMDBImages>(path, computedOptions);
+  }
+
+  async getTvSeasonVideos(
+    seasonSelection: types.TMDBSeasonSelection,
+    options?: types.TMDBTvSeasonVideoSearchOptions
+  ): Promise<types.TMDBVideos> {
+    const computedOptions = {
+      include_video_language: options?.include_video_language?.join(','),
+      language: options?.language
+    };
+    const path = `/tv/${seasonSelection.tvShowID}/season/${seasonSelection.seasonNumber}/videos`;
+    return await this.get<types.TMDBVideos>(path, computedOptions);
+  }
+
+  async getTvSeasonTranslations(
+    seasonSelection: types.TMDBSeasonSelection,
+    options?: types.TMDBLanguageOption
+  ): Promise<types.TMDBTranslations> {
+    const path = `/tv/${seasonSelection.tvShowID}/season/${seasonSelection.seasonNumber}/translations`;
+    return await this.get<types.TMDBTranslations>(path, options);
+  }
+
+  async getTvShowDetails<T extends types.TMDBAppendToResponseTvKey[] | undefined>(
+    id: number,
+    appendToResponse?: T,
+    language?: string
+  ) {
+    const options = {
+      append_to_response: appendToResponse ? appendToResponse.join(',') : undefined,
+      language: language
+    };
+    return await this.get<types.TMDBAppendToResponse<types.TMDBTvShowDetails, T, 'tvShow'>>(`/tv/${id}`, options);
+  }
+
+  async getTvShowAlternativeTitles(id: number): Promise<types.TMDBAlternativeTitles> {
+    return await this.get<types.TMDBAlternativeTitles>(`/tv/${id}/alternative_titles`);
+  }
+
+  async getTvShowChanges(
+    id: number,
+    options?: types.TMDBChangeOption
+  ): Promise<types.TMDBChanges<types.TMDBTvShowChangeValue>> {
+    return await this.get<types.TMDBChanges<types.TMDBTvShowChangeValue>>(`/tv/${id}/changes`, options);
+  }
+
+  async getTvShowContentRatings(id: number): Promise<types.TMDBContentRatings> {
+    return await this.get<types.TMDBContentRatings>(`/tv/${id}/content_ratings`);
+  }
+
+  async getTvShowAggregateCredits(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBAggregateCredits> {
+    return await this.get<types.TMDBAggregateCredits>(`/tv/${id}/aggregate_credits`, options);
+  }
+
+  async getTvShowCredits(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBCredits> {
+    return await this.get<types.TMDBCredits>(`/tv/${id}/credits`, options);
+  }
+
+  async getTvShowSeason(tvId: number, seasonNumber: number): Promise<types.TMDBSeasonDetails> {
+    return await this.get<types.TMDBSeasonDetails>(`/tv/${tvId}/season/${seasonNumber}`);
+  }
+
+  async getTvShowEpisodeGroups(id: number): Promise<types.TMDBEpisodeGroups> {
+    return await this.get<types.TMDBEpisodeGroups>(`/tv/${id}/episode_groups`);
+  }
+
+  async getTvShowExternalIds(id: number): Promise<types.TMDBExternalIds> {
+    return await this.get<types.TMDBExternalIds>(`/tv/${id}/external_ids`);
+  }
+
+  async getTvShowImages(id: number, options?: types.TMDBTvShowImageOptions): Promise<types.TMDBImages> {
+    const computedOptions = {
+      include_image_language: options?.include_image_language?.join(','),
+      language: options?.language
+    };
+    return await this.get<types.TMDBImages>(`/tv/${id}/images`, computedOptions);
+  }
+
+  async getTvShowKeywords(id: number): Promise<types.TMDBKeywords> {
+    return await this.get<types.TMDBKeywords>(`/tv/${id}/keywords`);
+  }
+
+  async getTvShowRecommendations(
+    id: number,
+    options?: types.TMDBLanguageOption & types.TMDBPageOption
+  ): Promise<types.TMDBRecommendations> {
+    return await this.get<types.TMDBRecommendations>(`/tv/${id}/recommendations`, options);
+  }
+
+  async getTvShowReviews(
+    id: number,
+    options?: types.TMDBLanguageOption & types.TMDBPageOption
+  ): Promise<types.TMDBReviews> {
+    return await this.get<types.TMDBReviews>(`/tv/${id}/reviews`, options);
+  }
+
+  async getTvShowScreenedTheatrically(id: number): Promise<types.TMDBScreenedTheatrically> {
+    return await this.get<types.TMDBScreenedTheatrically>(`/tv/${id}/screened_theatrically`);
+  }
+
+  async getTvShowSimilar(
+    id: number,
+    options?: types.TMDBLanguageOption & types.TMDBPageOption
+  ): Promise<types.TMDBSimilarTvShows> {
+    return await this.get<types.TMDBSimilarTvShows>(`/tv/${id}/similar`, options);
+  }
+
+  async getTvShowTranslations(id: number): Promise<types.TMDBTranslations> {
+    return await this.get<types.TMDBTranslations>(`/tv/${id}/translations`);
+  }
+
+  async getTvShowVideos(id: number, options?: types.TMDBTvShowVideoOptions): Promise<types.TMDBVideos> {
+    const computedOptions = {
+      include_video_language: options?.include_video_language?.join(','),
+      language: options?.language
+    };
+    return await this.get<types.TMDBVideos>(`/tv/${id}/videos`, computedOptions);
+  }
+
+  async getTvShowWatchProviders(id: number): Promise<types.TMDBWatchProviders> {
+    return await this.get<types.TMDBWatchProviders>(`/tv/${id}/watch/providers`);
+  }
+
+  async getLatestTvShow(): Promise<types.TMDBLatestTvShows> {
+    return await this.get<types.TMDBLatestTvShows>('/tv/latest');
+  }
+
+  async getTvShowsOnTheAir(
+    options?: types.TMDBPageOption & types.TMDBLanguageOption & types.TMDBTimezoneOption
+  ): Promise<types.TMDBOnTheAir> {
+    return await this.get<types.TMDBOnTheAir>('/tv/on_the_air', options);
+  }
+
+  async getTvShowsAiringToday(
+    options?: types.TMDBPageOption & types.TMDBLanguageOption & types.TMDBTimezoneOption
+  ): Promise<types.TMDBTvShowsAiringToday> {
+    return await this.get<types.TMDBTvShowsAiringToday>('/tv/airing_today', options);
+  }
+
+  async getPopularTvShows(
+    options?: types.TMDBPageOption & types.TMDBLanguageOption
+  ): Promise<types.TMDBPopularTvShows> {
+    return await this.get<types.TMDBPopularTvShows>('/tv/popular', options);
+  }
+
+  async getTopRatedTvShows(
+    options?: types.TMDBPageOption & types.TMDBLanguageOption
+  ): Promise<types.TMDBTopRatedTvShows> {
+    return await this.get<types.TMDBTopRatedTvShows>('/tv/top_rated', options);
+  }
 }
 
 export default TMDBService;
