@@ -338,3 +338,5 @@ export type TMDBAppendToResponse<
         ('combined_credits' extends T[number] ? { combined_credits: Omit<TMDBPersonCombinedCredits, 'id'> } : object) &
         ('tagged_images' extends T[number] ? { tagged_images: TMDBTaggedImages } : object)
     : never);
+
+export type TMDBProviderOptions = TMDBWatchRegionOption & TMDBLanguageOption;
