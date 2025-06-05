@@ -76,7 +76,7 @@ class TMDBService {
     return await this.get<types.TMDBMediaChanges>('/tv/changes', options);
   }
 
-  async getPersonChanges(options?: types.TMDBChangeOption): Promise<types.TMDBMediaChanges> {
+  async getPeopleChanges(options?: types.TMDBChangeOption): Promise<types.TMDBMediaChanges> {
     return await this.get<types.TMDBMediaChanges>('/person/changes', options);
   }
 
@@ -197,6 +197,60 @@ class TMDBService {
 
   async getKeywordDetails(id: number): Promise<types.TMDBKeyword> {
     return await this.get<types.TMDBKeyword>(`/keyword/${id}`);
+  }
+
+  async getPersonDetails<T extends types.TMDBAppendToResponsePersonKey[] | undefined>(
+    id: number,
+    appendToResponse?: T,
+    language?: string
+  ) {
+    const options = {
+      append_to_response: appendToResponse ? appendToResponse.join(',') : undefined,
+      language: language
+    };
+    return await this.get<types.TMDBAppendToResponse<types.TMDBPersonDetails, T, 'person'>>(`/person/${id}`, options);
+  }
+
+  async getPersonChanges(
+    id: number,
+    options?: types.TMDBChangeOption
+  ): Promise<types.TMDBChanges<types.TMDBPersonChangeValue>> {
+    return await this.get<types.TMDBChanges<types.TMDBPersonChangeValue>>(`/person/${id}/changes`, options);
+  }
+
+  async getPersonMovieCredits(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBPersonMovieCredit> {
+    return await this.get<types.TMDBPersonMovieCredit>(`/person/${id}/movie_credits`, options);
+  }
+
+  async getPersonTvShowCredits(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBPersonTvShowCredit> {
+    return await this.get<types.TMDBPersonTvShowCredit>(`/person/${id}/tv_credits`, options);
+  }
+
+  async getPersonCombinedCredits(
+    id: number,
+    options?: types.TMDBLanguageOption
+  ): Promise<types.TMDBPersonCombinedCredits> {
+    return await this.get<types.TMDBPersonCombinedCredits>(`/person/${id}/combined_credits`, options);
+  }
+
+  async getPersonExternalId(id: number): Promise<types.TMDBExternalIds> {
+    return await this.get<types.TMDBExternalIds>(`/person/${id}/external_ids`);
+  }
+
+  async getPersonImages(id: number): Promise<types.TMDBPeopleImages> {
+    return await this.get<types.TMDBPeopleImages>(`/person/${id}/images`);
+  }
+
+  async getPersonTranslations(id: number): Promise<types.TMDBPersonTranslations> {
+    return await this.get<types.TMDBPersonTranslations>(`/person/${id}/translations`);
+  }
+
+  async getPersonLatest(): Promise<types.TMDBPersonDetails> {
+    return await this.get<types.TMDBPersonDetails>('/person/latest');
+  }
+
+  async getPersonPopular(options?: types.TMDBLanguageOption & types.TMDBPageOption): Promise<types.TMDBPopularPeople> {
+    return await this.get<types.TMDBPopularPeople>('/person/popular', options);
   }
 
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
