@@ -29,10 +29,57 @@
     "pack:win": "npm run build && npx electron-builder --win",
     "pack:mac": "npm run build && npx electron-builder --mac"
   },
+  "build": {
+    "appId": "com.malloryscotton.moon",
+    "productName": "Moon Home Theater",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "build/icons",
+      "category": "AudioVideo"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.entertainment"
+    }
+  },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
+    "@types/ffprobe-static": "^2.0.3",
     "@types/ini": "^4.1.1",
     "@types/node": "^22.15.29",
     "electron": "^36.4.0",
@@ -41,14 +88,14 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@ffmpeg-installer/ffmpeg": "^1.1.0",
-    "@ffprobe-installer/ffprobe": "^2.1.2",
     "axios": "^1.9.0",
     "body-parser": "^2.2.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0",
     "helmet": "^8.1.0",
     "http": "^0.0.1-security",
     "ini": "^5.0.0",

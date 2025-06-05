@@ -1,25 +1,35 @@
-import ffmpegPath from '@ffmpeg-installer/ffmpeg';
-import ffprobePath from '@ffprobe-installer/ffprobe';
+import ffmpeg from 'ffmpeg-static';
+import { path as ffprobe } from 'ffprobe-static';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { getAppDataSubPath } from './appDataPath';
 
 export function getFFmpegPath(): string {
-  return ffmpegPath.path;
+  if (typeof ffmpeg !== 'string') {
+    throw new Error('ffmpeg-static path is not available or is not a string.');
+  }
+  return ffmpeg;
 }
 
 export function getFFprobePath(): string {
-  return ffprobePath.path;
+  if (typeof ffprobe !== 'string') {
+    throw new Error('ffprobe-static path is not available or is not a string.');
+  }
+  return ffprobe;
 }
 
 export async function copyBinariesToAppData(): Promise<void> {
   const binariesPath = getAppDataSubPath('binaries');
+  await fs.mkdir(binariesPath, { recursive: true }); // Ensure binaries directory exists
 
-  const ffmpegDestination = path.join(getLocalFFmpegPath());
-  const ffprobeDestination = path.join(getLocalFFprobePath());
+  const ffmpegSourcePath = getFFmpegPath();
+  const ffprobeSourcePath = getFFprobePath();
 
-  await fs.copyFile(ffmpegPath.path, ffmpegDestination);
-  await fs.copyFile(ffprobePath.path, ffprobeDestination);
+  const ffmpegDestination = getLocalFFmpegPath();
+  const ffprobeDestination = getLocalFFprobePath();
+
+  await fs.copyFile(ffmpegSourcePath, ffmpegDestination);
+  await fs.copyFile(ffprobeSourcePath, ffprobeDestination);
 
   if (process.platform !== 'win32') {
     await fs.chmod(ffmpegDestination, 0o755);
