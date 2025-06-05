@@ -195,6 +195,10 @@ class TMDBService {
     return await this.get<types.TMDBGenres>('/genre/tv/list', options);
   }
 
+  async getKeywordDetails(id: number): Promise<types.TMDBKeyword> {
+    return await this.get<types.TMDBKeyword>(`/keyword/${id}`);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
