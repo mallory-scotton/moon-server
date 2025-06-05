@@ -296,3 +296,7 @@ export const TMDBCountryCodes = [
 ] as const;
 
 export type TMDBCountryCode = (typeof TMDBCountryCodes)[number];
+
+export interface TMDBGenres {
+  genres: Array<{ id: number; name: string }>;
+}
