@@ -21,16 +21,38 @@
   },
   "main": "src/index.ts",
   "scripts": {
-    "start": "npx tsx src/index.ts"
+    "start": "npx tsx src/index.ts",
+    "build": "npx tsc",
+    "package": "npm run build && pkg . --out-path build --targets node18-linux-x64",
+    "package:all": "npm run build && pkg . --targets node18-linux-x64,node18-win-x64,node18-macos-x64 --out-path build",
+    "package:win": "npm run build && pkg . --targets node18-win-x64 --out-path build",
+    "package:linux": "npm run build && pkg . --targets node18-linux-x64 --out-path build",
+    "package:mac": "npm run build && pkg . --targets node18-macos-x64 --out-path build"
   },
   "type": "module",
+  "bin": "./dist/index.js",
+  "pkg": {
+    "targets": [
+      "node18-linux-x64",
+      "node18-win-x64", 
+      "node18-macos-x64"
+    ],
+    "scripts": [
+      "dist/**/*.js"
+    ],
+    "assets": [
+      "node_modules/@ffmpeg-installer/ffmpeg/ffmpeg",
+      "node_modules/@ffprobe-installer/ffprobe/ffprobe"
+    ],
+    "outputPath": "build"
+  },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
     "@types/ini": "^4.1.1",
     "@types/node": "^22.15.29",
-    "tsc": "^2.0.4",
+    "pkg": "^5.8.1",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   },
