@@ -11,5 +11,3 @@ await ensureFFmpegBinaries();
 await loadConfiguration();
 await sequelize.sync();
 await startServer();
-
-process.exit(0);
