@@ -171,6 +171,10 @@ class TMDBService {
     return await this.get<types.TMDBTimezoneConfiguration[]>('/configuration/timezones');
   }
 
+  async getCredits(id: number): Promise<types.TMDBCreditResponse> {
+    return await this.get<types.TMDBCreditResponse>(`/credit/${id}`);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
