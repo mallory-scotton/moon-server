@@ -116,6 +116,25 @@ class TMDBService {
     return await this.get<types.TMDBWatchProviderResult>('/watch/providers/tv', options);
   }
 
+  async getCollectionDetails(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBCollectionDetails> {
+    return await this.get<types.TMDBCollectionDetails>(`/collection/${id}`, options);
+  }
+
+  async getCollectionImages(
+    id: number,
+    options?: types.TMDBCollectionImageOptions
+  ): Promise<types.TMDBImageCollection> {
+    const computedOptions = {
+      include_image_language: options?.include_image_language?.join(','),
+      language: options?.language
+    };
+    return await this.get<types.TMDBImageCollection>(`/collection/${id}/images`, computedOptions);
+  }
+
+  async getCollectionTranslations(id: number, options?: types.TMDBLanguageOption): Promise<types.TMDBTranslation> {
+    return await this.get<types.TMDBTranslation>(`/collection/${id}/translations`, options);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
