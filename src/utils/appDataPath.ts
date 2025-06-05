@@ -28,7 +28,7 @@ export async function ensureAppDataDirectories(): Promise<void> {
 
   await fs.mkdir(appDataPath, { recursive: true });
 
-  const subdirs = ['logs', 'cache'];
+  const subdirs = ['logs', 'cache', 'binaries'];
 
   for (const subdir of subdirs) {
     await fs.mkdir(path.join(appDataPath, subdir), { recursive: true });
