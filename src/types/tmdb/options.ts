@@ -22,7 +22,7 @@ import {
   TMDBTaggedImages,
   TMDBTranslations,
   TMDBVideos,
-  WatchProviders,
+  TMDBWatchProviders,
   TMDBPersonChangeValue,
   TMDBMovieChangeValue,
   TMDBTvShowChangeValue,
@@ -317,7 +317,7 @@ export type TMDBAppendToResponse<
               >;
             }
           : object) &
-        ('watch/providers' extends T[number] ? { 'watch/providers': Omit<WatchProviders, 'id'> } : object) &
+        ('watch/providers' extends T[number] ? { 'watch/providers': Omit<TMDBWatchProviders, 'id'> } : object) &
         ('aggregate_credits' extends T[number] ? { aggregate_credits: Omit<TMDBCredits, 'id'> } : object) &
         ('episode_groups' extends T[number] ? { episode_groups: Omit<TMDBEpisodeGroups, 'id'> } : object) &
         ('screened_theatrically' extends T[number]
@@ -340,3 +340,7 @@ export type TMDBAppendToResponse<
     : never);
 
 export type TMDBProviderOptions = TMDBWatchRegionOption & TMDBLanguageOption;
+
+export interface TMDBMoviesImageSearchOptions extends TMDBLanguageOption {
+  include_image_language?: string[];
+}

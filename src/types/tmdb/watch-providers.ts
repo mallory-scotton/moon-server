@@ -311,7 +311,7 @@ export interface TMDBWatchLocale {
   };
 }
 
-export interface WatchProviders {
+export interface TMDBWatchProviders {
   id: number;
   results: TMDBWatchLocale;
 }
