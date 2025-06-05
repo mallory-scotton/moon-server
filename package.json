@@ -1,15 +1,28 @@
 {
   "name": "moon",
-  "version": "1.0.0",
-  "description": "",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "Open-Source Media Management System designed for Home Theaters",
+  "author": {
+    "name": "Mallory SCOTTON",
+    "email": "mscotton.pro@gmail.com",
+    "url": "https://github.com/mallory-scotton"
+  },
+  "keywords": [
+    "media-management",
+    "media-server",
+    "media-player",
+    "api",
+    "home-theater"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/mallory-scotton/moon-server"
+  },
   "main": "src/index.ts",
   "scripts": {
-    "start": "npx tsx src/index.ts",
-    "migrate": "npx tsx src/migrate.ts"
+    "start": "npx tsx src/index.ts"
   },
-  "keywords": [],
-  "author": "mallory-scotton",
-  "license": "ISC",
   "type": "module",
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
