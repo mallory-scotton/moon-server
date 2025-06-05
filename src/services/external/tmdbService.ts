@@ -68,11 +68,11 @@ class TMDBService {
     return await this.get<types.TMDBCertifications>('/certification/tv/list');
   }
 
-  async getMovieChanges(options?: types.TMDBChangeOption): Promise<types.TMDBMediaChanges> {
+  async getMoviesChanges(options?: types.TMDBChangeOption): Promise<types.TMDBMediaChanges> {
     return await this.get<types.TMDBMediaChanges>('/movie/changes', options);
   }
 
-  async getTvShowChanges(options?: types.TMDBChangeOption): Promise<types.TMDBMediaChanges> {
+  async getTvShowsChanges(options?: types.TMDBChangeOption): Promise<types.TMDBMediaChanges> {
     return await this.get<types.TMDBMediaChanges>('/tv/changes', options);
   }
 
