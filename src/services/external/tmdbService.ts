@@ -28,27 +28,27 @@ class TMDBService {
     return response.data as T;
   }
 
-  async searchCompanies(options: types.TMDBSearchOptions): Promise<types.TMDBSearch<types.TMDBCompany>> {
+  async searchCompany(options: types.TMDBSearchOptions): Promise<types.TMDBSearch<types.TMDBCompany>> {
     return await this.get<types.TMDBSearch<types.TMDBCompany>>('/search/company', options);
   }
 
-  async searchCollections(options: types.TMDBSearchOptions): Promise<types.TMDBSearch<types.TMDBCollection>> {
+  async searchCollection(options: types.TMDBSearchOptions): Promise<types.TMDBSearch<types.TMDBCollection>> {
     return await this.get<types.TMDBSearch<types.TMDBCollection>>('/search/collection', options);
   }
 
-  async searchKeywords(options: types.TMDBSearchOptions): Promise<types.TMDBSearch<{ id: string; name: string }>> {
+  async searchKeyword(options: types.TMDBSearchOptions): Promise<types.TMDBSearch<{ id: string; name: string }>> {
     return await this.get<types.TMDBSearch<{ id: string; name: string }>>('/search/keyword', options);
   }
 
-  async searchMovies(options: types.TMDBMovieSearchOptions): Promise<types.TMDBSearch<types.TMDBMovie>> {
+  async searchMovie(options: types.TMDBMovieSearchOptions): Promise<types.TMDBSearch<types.TMDBMovie>> {
     return await this.get<types.TMDBSearch<types.TMDBMovie>>('/search/movie', options);
   }
 
-  async searchPeople(options: types.TMDBPeopleSearchOptions): Promise<types.TMDBSearch<types.TMDBPerson>> {
+  async searchPerson(options: types.TMDBPeopleSearchOptions): Promise<types.TMDBSearch<types.TMDBPerson>> {
     return await this.get<types.TMDBSearch<types.TMDBPerson>>('/search/person', options);
   }
 
-  async searchTvShows(options: types.TMDBTvSearchOptions): Promise<types.TMDBSearch<types.TMDBTV>> {
+  async searchTvShow(options: types.TMDBTvSearchOptions): Promise<types.TMDBSearch<types.TMDBTV>> {
     return await this.get<types.TMDBSearch<types.TMDBTV>>('/search/tv', options);
   }
 
