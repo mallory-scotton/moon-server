@@ -175,6 +175,14 @@ class TMDBService {
     return await this.get<types.TMDBCreditResponse>(`/credit/${id}`);
   }
 
+  async discoverMovies(options?: types.TMDBMovieQueryOptions): Promise<types.TMDBMovieDiscoverResult> {
+    return await this.get<types.TMDBMovieDiscoverResult>('/discover/movie', options);
+  }
+
+  async discoverTvShows(options?: types.TMDBTvShowQueryOptions): Promise<types.TMDBTvShowDiscoverResult> {
+    return await this.get<types.TMDBTvShowDiscoverResult>('/discover/tv', options);
+  }
+
   async getMovieDetails<T extends types.TMDBAppendToResponseMovieKey[] | undefined>(
     id: number,
     appendToResponse?: T,
