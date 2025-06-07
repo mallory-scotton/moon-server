@@ -1,6 +1,8 @@
 import { app, BrowserWindow } from 'electron';
 import { startApplication } from '../index';
 
+app.commandLine.appendSwitch('gtk-version', '3');
+
 let mainWindow: BrowserWindow | null = null;
 let serverStarted = false;
 
