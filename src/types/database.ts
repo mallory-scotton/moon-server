@@ -199,3 +199,21 @@ export enum TagType {
   STAR,
   COUNTRY
 }
+
+export enum MetadataType {
+  MOVIE,
+  SHOW,
+  SEASON,
+  EPISODE,
+  TRAILER,
+  COMIC,
+  PERSON,
+  ARTIST,
+  ALBUM,
+  TRACK,
+  PHOTO_ALBUM,
+  PHOTO,
+  CLIP,
+  PLAYLIST,
+  COLLECTION
+}
