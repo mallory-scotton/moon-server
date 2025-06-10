@@ -1,6 +1,9 @@
 import os from 'os';
 import path from 'path';
 import { promises as fs } from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const APP_NAME = 'Moon';
 
