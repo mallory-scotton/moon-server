@@ -61,6 +61,7 @@ interface MetadataItemAttributes {
   audience_rating: number;
   created_at?: Date;
   updated_at?: Date;
+  deleted_at?: Date;
 }
 
 interface MetadataItemCreationAttributes extends Optional<MetadataItemAttributes, 'id'> {}
@@ -100,6 +101,7 @@ class MetadataItem
   declare audience_rating: number;
   declare readonly created_at: Date;
   declare readonly updated_at: Date;
+  declare readonly deleted_at: Date;
 
   declare getMediaItems: HasManyGetAssociationsMixin<MediaItem>;
   declare addMediaItem: HasManyAddAssociationMixin<MediaItem, number>;
@@ -234,7 +236,9 @@ MetadataItem.init(
     tableName: 'metadata_items',
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    updatedAt: 'updated_at',
+    paranoid: true,
+    deletedAt: 'deleted_at'
   }
 );
 
