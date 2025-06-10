@@ -10,7 +10,9 @@ export async function startApplication() {
   await ensureAppDataDirectories();
   await ensureFFmpegBinaries();
   await loadConfiguration();
-  await sequelize.sync();
+  await sequelize.sync({
+    force: process.moon.database.forceSync
+  });
   await startServer();
 }
 
