@@ -5,6 +5,13 @@ import { promises as fs } from 'fs';
 const APP_NAME = 'Moon';
 
 export function getAppDataPath(): string {
+  const isDevelopment = process.env.NODE_ENV === 'development';
+
+  if (isDevelopment) {
+    const projectRoot = path.resolve(__dirname, '../../');
+    return path.join(projectRoot, 'temp', APP_NAME);
+  }
+
   const platform = os.platform();
   const homeDir = os.homedir();
 
