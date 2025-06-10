@@ -1,6 +1,7 @@
 import User from './User';
 import MediaItem from './MediaItem';
 import MediaStream from './MediaStream';
+import MediaPart from './MediaPart';
 import SectionLocation from './SectionLocation';
 import LibrarySection from './LibrarySection';
 import LibrarySectionPermission from './LibrarySectionPermission';
@@ -103,10 +104,31 @@ MediaItem.belongsTo(MediaItem, {
   as: 'mediaItem'
 });
 
+MediaPart.belongsTo(MediaItem, {
+  foreignKey: 'media_item_id',
+  as: 'mediaItem'
+});
+
+MediaPart.belongsTo(Directory, {
+  foreignKey: 'directory_id',
+  as: 'directory'
+});
+
+MediaItem.hasMany(MediaPart, {
+  foreignKey: 'media_item_id',
+  as: 'mediaParts'
+});
+
+Directory.hasMany(MediaPart, {
+  foreignKey: 'directory_id',
+  as: 'mediaParts'
+});
+
 export {
   User,
   MediaItem,
   MediaStream,
+  MediaPart,
   SectionLocation,
   LibrarySection,
   LibrarySectionPermission,
