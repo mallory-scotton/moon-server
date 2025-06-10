@@ -28,7 +28,7 @@ export async function ensureAppDataDirectories(): Promise<void> {
 
   await fs.mkdir(appDataPath, { recursive: true });
 
-  const subdirs = ['logs', 'cache', 'binaries'];
+  const subdirs = ['logs', 'cache', 'binaries', 'medias'];
 
   for (const subdir of subdirs) {
     await fs.mkdir(path.join(appDataPath, subdir), { recursive: true });
@@ -49,4 +49,8 @@ export function getCachePath(): string {
 
 export function getConfigPath(): string {
   return path.join(getAppDataPath(), 'config.ini');
+}
+
+export function getMediaPath(): string {
+  return path.join(getAppDataPath(), 'medias');
 }
