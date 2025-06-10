@@ -1,5 +1,6 @@
 import User from './User';
 import MediaItem from './MediaItem';
+import MediaStream from './MediaStream';
 import SectionLocation from './SectionLocation';
 import LibrarySection from './LibrarySection';
 import LibrarySectionPermission from './LibrarySectionPermission';
@@ -92,4 +93,23 @@ MetadataItem.belongsToMany(Tag, {
   as: 'tags'
 });
 
-export { User, MediaItem, SectionLocation, LibrarySection, LibrarySectionPermission, MetadataItem, Directory };
+MediaItem.hasMany(MediaItem, {
+  foreignKey: 'media_item_id',
+  as: 'mediaStreams'
+});
+
+MediaItem.belongsTo(MediaItem, {
+  foreignKey: 'media_item_id',
+  as: 'mediaItem'
+});
+
+export {
+  User,
+  MediaItem,
+  MediaStream,
+  SectionLocation,
+  LibrarySection,
+  LibrarySectionPermission,
+  MetadataItem,
+  Directory
+};

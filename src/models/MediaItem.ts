@@ -6,12 +6,23 @@ import {
   ForeignKey,
   BelongsToGetAssociationMixin,
   BelongsToSetAssociationMixin,
-  BelongsToCreateAssociationMixin
+  BelongsToCreateAssociationMixin,
+  HasManyGetAssociationsMixin,
+  HasManyAddAssociationMixin,
+  HasManyAddAssociationsMixin,
+  HasManySetAssociationsMixin,
+  HasManyRemoveAssociationMixin,
+  HasManyRemoveAssociationsMixin,
+  HasManyHasAssociationMixin,
+  HasManyHasAssociationsMixin,
+  HasManyCountAssociationsMixin,
+  HasManyCreateAssociationMixin
 } from 'sequelize';
 import { sequelize } from '../config';
 import LibrarySection from './LibrarySection';
 import SectionLocation from './SectionLocation';
 import MetadataItem from './MetadataItem';
+import MediaStream from './MediaStream';
 
 interface MediaItemAttributes {
   id: number;
@@ -84,14 +95,27 @@ class MediaItem extends Model<MediaItemAttributes, MediaItemCreationAttributes> 
   declare setMetadataItem: BelongsToSetAssociationMixin<MetadataItem, number>;
   declare createMetadataItem: BelongsToCreateAssociationMixin<MetadataItem>;
 
+  declare getMediaStreams: HasManyGetAssociationsMixin<MediaStream>;
+  declare addMediaStream: HasManyAddAssociationMixin<MediaStream, number>;
+  declare addMediaStreams: HasManyAddAssociationsMixin<MediaStream, number>;
+  declare setMediaStreams: HasManySetAssociationsMixin<MediaStream, number>;
+  declare removeMediaStream: HasManyRemoveAssociationMixin<MediaStream, number>;
+  declare removeMediaStreams: HasManyRemoveAssociationsMixin<MediaStream, number>;
+  declare hasMediaStream: HasManyHasAssociationMixin<MediaStream, number>;
+  declare hasMediaStreams: HasManyHasAssociationsMixin<MediaStream, number>;
+  declare countMediaStreams: HasManyCountAssociationsMixin;
+  declare createMediaStream: HasManyCreateAssociationMixin<MediaStream>;
+
   declare readonly librarySection?: LibrarySection;
   declare readonly sectionLocation?: SectionLocation;
   declare readonly metadataItem?: MetadataItem;
+  declare readonly mediaStreams?: MediaStream[];
 
   declare static associations: {
     librarySection: Association<MediaItem, LibrarySection>;
     sectionLocation: Association<MediaItem, SectionLocation>;
     metadataItem: Association<MediaItem, MetadataItem>;
+    mediaStreams: Association<MediaItem, MediaStream>;
   };
 }
 

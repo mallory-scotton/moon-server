@@ -217,3 +217,9 @@ export enum MetadataType {
   PLAYLIST,
   COLLECTION
 }
+
+export enum StreamType {
+  VIDEO,
+  AUDIO,
+  SUBTITLE
+}
